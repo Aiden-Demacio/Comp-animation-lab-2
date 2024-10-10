@@ -4,7 +4,7 @@ using UnityEngine;
 
 
 [System.Serializable]
-public class Waypoint : MonoBehaviour
+public class Waypoint
 {
 
 

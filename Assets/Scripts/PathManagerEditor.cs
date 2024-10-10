@@ -64,7 +64,7 @@ public class PathManagerEditor : Editor
                 Color c = GUI.color;
                 if (selectedPoint == p) GUI.color = Color.green;
 
-
+                EditorGUI.BeginChangeCheck();
                 Vector3 oldPos = p.GetPos();
                 Vector3 newPos = EditorGUILayout.Vector3Field("", oldPos);
 
@@ -155,8 +155,6 @@ public class PathManagerEditor : Editor
         
         return isChanged;
     }
-    
-
-    }
+}
 
 

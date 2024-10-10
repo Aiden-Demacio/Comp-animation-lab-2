@@ -13,9 +13,16 @@ public class PathController : MonoBehaviour
 
     public float MoveSpeed;
     public float RotateSpeed;
+
+
+    public Animator animator;
+    public bool isWalking;
     // Start is called before the first frame update
     void Start()
     {
+
+        isWalking = false;
+        animator.SetBool("isWalking", isWalking);
         thePath = pathManager.GetPath();
         if(thePath != null && thePath.Count > 0)
         {
@@ -43,15 +50,27 @@ public class PathController : MonoBehaviour
         }
         Vector3 movDir = Vector3.forward;
         transform.Translate(movDir * stepSize);
-        {
-            
-        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        target = pathManager.GetNextTarget();
     }
 
     // Update is called once per frame
     void Update()
     {
-        rotateTowardsTarget();
-        moveForward();
+        
+
+        if (Input.anyKeyDown)
+        {
+            isWalking = !isWalking;
+            animator.SetBool("isWalking", isWalking);
+        }
+        if(isWalking)
+        {
+            rotateTowardsTarget();
+            moveForward();
+        }
     }
 }
