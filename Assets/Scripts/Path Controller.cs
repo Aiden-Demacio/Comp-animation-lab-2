@@ -11,6 +11,8 @@ public class PathController : MonoBehaviour
     List<Waypoint> thePath;
     Waypoint target;
 
+    public bool bumped;
+
     public float MoveSpeed;
     public float RotateSpeed;
 
@@ -55,6 +57,13 @@ public class PathController : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         target = pathManager.GetNextTarget();
+        if (other.transform.tag != "waypoint")
+        {
+            isWalking = !isWalking;
+            animator.SetBool("isWalking", isWalking);
+
+        }
+        
     }
 
     // Update is called once per frame
@@ -66,11 +75,17 @@ public class PathController : MonoBehaviour
         {
             isWalking = !isWalking;
             animator.SetBool("isWalking", isWalking);
+           
         }
+        
         if(isWalking)
         {
             rotateTowardsTarget();
             moveForward();
         }
     }
+
+    
+        
+    
 }
